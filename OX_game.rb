@@ -1,36 +1,45 @@
-board[0,0,0][0,0,0]
+$board = Array.new(3,Array.new(3,0))
 turn = 1
+$ox = 0
 
-for num in 0..4 do
-  if num%2 == 0 then
-      2.times{
-        print(" | ")
-      }
-      print("\n")
-  else
-      3.times{
-        print("ー")
-      }
-      print("\n")
-  end
-end
-
-print("input row-number: ")
-  row = gets
-  row = row.chomp!
-  p row
-print("input column-number: ")
-  column = gets
-  column = column.chomp!
-  p column
-  
-  if board[row][column]!=0 then
-      print("Cannot draw !!")
-  else
-      board[raw][column] = turn
-      if turn == 1 then
-          turn += 1
-      else 
-          turn -= 1
+9.times{
+    for num in 0..4 do
+      if num%2 == 0 then
+          for num2 in 0..2 do
+              case $board[num/2][num2]
+                when 0 then
+                  ox = "△"
+                when 1 then
+                  ox = "〇"
+                when 2 then
+                  ox = "✕"
+              end
+            print(ox," | ")
+        end
+        print("\n")
+      else
+          6.times{
+            print("ー")
+          }
+          print("\n")
       end
-  end
+    end
+    
+    print("input row-number: ")
+    row = gets.to_i
+    p row
+    print("input column-number: ")
+    column = gets.to_i
+    p column
+      
+    if $board[row][column]!=0 then
+       print("Cannot draw !!\n")
+    else
+      $board[row][column] = turn
+      if turn == 1 then
+        turn += 1
+      else 
+        turn -= 1
+      end
+    end
+}
