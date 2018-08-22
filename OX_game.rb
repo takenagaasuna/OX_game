@@ -1,4 +1,7 @@
-$board = Array.new(3,Array.new(3,0))
+$board = Array.new(3,0)
+$board.length.times{ |i|
+  $board[i] = Array.new(3,0)
+}
 turn = 1
 $ox = 0
 
@@ -15,11 +18,11 @@ $ox = 0
                   ox = "✕"
               end
             print(ox," | ")
-        end
+          end
         print("\n")
       else
-          6.times{
-            print("ー")
+          13.times{
+            print("―")
           }
           print("\n")
       end
@@ -27,19 +30,19 @@ $ox = 0
     
     print("input row-number: ")
     row = gets.to_i
-    p row
+    #p row
     print("input column-number: ")
     column = gets.to_i
-    p column
+    #p column
       
     if $board[row][column]!=0 then
        print("Cannot draw !!\n")
-    else
+    end
       $board[row][column] = turn
+      #p $board
       if turn == 1 then
         turn += 1
       else 
         turn -= 1
       end
-    end
 }
