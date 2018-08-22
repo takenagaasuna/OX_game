@@ -1,4 +1,5 @@
-#board[3][3]
+board[0,0,0][0,0,0]
+turn = 1
 
 for num in 0..4 do
   if num%2 == 0 then
@@ -22,3 +23,14 @@ print("input column-number: ")
   column = gets
   column = column.chomp!
   p column
+  
+  if board[row][column]!=0 then
+      print("Cannot draw !!")
+  else
+      board[raw][column] = turn
+      if turn == 1 then
+          turn += 1
+      else 
+          turn -= 1
+      end
+  end
