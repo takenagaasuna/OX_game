@@ -28,8 +28,8 @@ def win
     if ($board[0][num] == $board[1][num] && $board[0][num] == $board[2][num] &&
         $board[0][num]!=0)||
        ($board[num][0..2].uniq.count == 1 && $board[num][0]!=0)||
-       ($board[0][0] == $board[1][1] && $board[0][0] == $board[2][2]) ||
-       ($board[0][2] == $board[1][1] && $board[0][2] == $board[2][0])
+       ($board[0][0] == $board[1][1] && $board[0][0] == $board[2][2] && $board[0][num]!=0) ||
+       ($board[0][2] == $board[1][1] && $board[0][2] == $board[2][0] && $board[0][num]!=0)
         then
       return true
     end
@@ -45,12 +45,16 @@ for count in 0..8 do
   show
     
   begin
-  print("input row-number: ")
+  print("input row-number(0~2): ")
   row = gets.to_i
-  print("input column-number: ")
+  print("input column-number(0~2): ")
   column = gets.to_i
     
-  if $board[row][column] != 0 then 
+  if row > 2|| column >2 then
+     print("Cannot draw !!\n")
+     redo
+  end
+  if $board[row][column] != 0 then
      print("Cannot draw !!\n")
   end
   end while $board[row][column] != 0
