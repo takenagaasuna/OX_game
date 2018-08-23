@@ -28,8 +28,8 @@ def win
     if ($board[0][num] == $board[1][num] && $board[0][num] == $board[2][num] &&
         $board[0][num]!=0)||
        ($board[num][0..2].uniq.count == 1 && $board[num][0]!=0)||
-       ($board[0][0] == $board[1][1] && $board[0][0] == $board[2][2] && $board[0][num]!=0) ||
-       ($board[0][2] == $board[1][1] && $board[0][2] == $board[2][0] && $board[0][num]!=0)
+       ($board[0][0] == $board[1][1] && $board[0][0] == $board[2][2] && $board[0][0]!=0) ||
+       ($board[0][2] == $board[1][1] && $board[0][2] == $board[2][0] && $board[0][2]!=0)
         then
       return true
     end
