@@ -1,36 +1,69 @@
 def show
-  for num in 0..4 do
-    if num%2 == 0 then
-      for num2 in 0..2 do
-        case $board[num/2][num2]
-          when 0 then
-            ox = "  "
-          when 1 then
-            ox = "〇"
-          when 2 then
-            ox = "✕"
+  (0..4).each do | locate |
+    if locate.even?
+      (0..2).each do |locate2 |
+        case $board[locate/2][locate2]
+        when 0
+          ox = "  "
+        when 1
+          ox = "〇"
+        when 2
+          ox = "✕"
         end
         print(ox," | ")
       end
       print("\n")
     else
-      13.times{
-        print("―")
-      }
+      13.times{ print("―") }
       print("\n")
     end
   end
 end
   
+def row_line(bingo)
+  if $board[bingo][0..2].uniq.count == 1 &&
+     $board[bingo][0]!=0 then
+    true
+  else
+    false
+  end
+end
 
+def column_line(bingo)
+  if $board[0][bingo] == $board[1][bingo] &&
+     $board[0][bingo] == $board[2][bingo] &&
+     $board[0][bingo]!=0 then
+     true
+  else
+    false
+  end
+end
+
+def diagonal_left
+  if $board[0][0] == $board[1][1] &&
+    $board[0][0] == $board[2][2] &&
+    $board[0][0]!=0 then
+    true
+  else
+    false
+  end
+end
+
+def diagonal_right
+  if $board[0][2] == $board[1][1] &&
+      $board[0][2] == $board[2][0] &&
+      $board[0][2]!=0 then
+      true
+    else
+      false
+  end
+end
+
+     
 def win
-  for num in 0..2 do
-    if ($board[0][num] == $board[1][num] && $board[0][num] == $board[2][num] &&
-        $board[0][num]!=0)||
-       ($board[num][0..2].uniq.count == 1 && $board[num][0]!=0)||
-       ($board[0][0] == $board[1][1] && $board[0][0] == $board[2][2] && $board[0][0]!=0) ||
-       ($board[0][2] == $board[1][1] && $board[0][2] == $board[2][0] && $board[0][2]!=0)
-        then
+  (0..2).each do | bingo |
+    if row_line(bingo) || column_line(bingo) ||
+       diagonal_left || diagonal_right then
       return true
     end
   end
@@ -40,41 +73,38 @@ end
 $board = Array.new(3,0){ Array.new(3,0) }
 turn = 1
 
-for count in 0..8 do
+(0..8).each do | i |
   print("\nPlayer",turn ," turn !\n\n")
   show
     
   begin
-  print("input row-number(0~2): ")
-  row = gets.to_i
-  print("input column-number(0~2): ")
-  column = gets.to_i
+    print("input row-number(0~2): ")
+    row = gets.to_i
+    print("input column-number(0~2): ")
+    column = gets.to_i
     
-  if row > 2|| column >2 then
-     print("Cannot draw !!\n")
-     redo
-  end
-  if $board[row][column] != 0 then
-     print("Cannot draw !!\n")
-  end
+    if row > 2|| column >2 then
+       print("Cannot draw !!\n")
+       redo
+    end
+    if $board[row][column] != 0 then
+       print("Cannot draw !!\n")
+    end
   end while $board[row][column] != 0
 
   $board[row][column] = turn
   judge = win
-  if judge == true then
+  if judge then
     show
     print( "winner is player",turn,"!!\n")
     break
   end
-        
-  if turn == 1 then
-    turn += 1
-  else 
-    turn -= 1
-  end
+  
+  @count = i
+  turn == 1 ? turn += 1 : turn -= 1
 end
 
-if count == 8 then
+if @count == 8
   show
   print( "Draw !!\n")
 end
