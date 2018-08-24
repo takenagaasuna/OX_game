@@ -1,4 +1,4 @@
-class Board
+class Place
 
   def draw(board,locate)
     (0..2).each do |locate2 |
