@@ -8,7 +8,7 @@ def draw(board, locate)
     when 2
       ox = "✕"
     end
-    print(ox, " | ")
+    print(ox," | ")
   end
   print("\n")
 end
