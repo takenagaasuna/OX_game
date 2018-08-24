@@ -10,13 +10,16 @@ column = 10
 
 place = Place.new
 judge = Judge.new
-player = Player.new
+player1 = Player.new
+player2 = Player.new
 
 (0..8).each do |cycle|
   print("\nPlayer",turn ," turn !\n\n")
   place.show(board)
     
-  player.input(board, row, column, turn)
+  turn == 1 ?
+  player1.input(board, row, column, turn) :
+  player2.input(board, row, column, turn)
   
   if judge.win(board)
     place.show(board)
