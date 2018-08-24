@@ -2,8 +2,10 @@ require './Place'
 require './Judge'
 require './Player'
 
+player1_turn = 1
+
 board = Array.new(3,0){ Array.new(3,0) }
-turn = 1
+turn = player1_turn
 count = 0
 row = 10
 column = 10
@@ -14,8 +16,6 @@ player1 = Player.new
 player2 = Player.new
 
 (0..8).each do |cycle|
-  print("\nPlayer",turn ," turn !\n\n")
-  place.show(board)
     
   turn == 1 ?
   player1.input(board, row, column, turn) :
@@ -28,7 +28,7 @@ player2 = Player.new
   end
   
   count = cycle
-  turn == 1 ? turn += 1 : turn -= 1
+  turn == player1_turn ? turn += 1 : turn -= 1
 end
 
 if count == 8

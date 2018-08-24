@@ -1,5 +1,12 @@
+require './Place'
+
 class Player 
   def input(board, row, column, turn)
+    place = Place.new
+    
+     print("\nPlayer",turn ," turn !\n\n")
+     place.show(board)
+    
     begin
       print("input row-number(0~2): ")
       row = gets.to_i
